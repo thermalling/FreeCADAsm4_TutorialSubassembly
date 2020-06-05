@@ -1,0 +1,378 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title></title></head><body><h1>Phone Assembly Tutorial</h1>
+
+<h2>A simple subassembly task using the FreeCAD Assembly 4 Workbench</h2>
+
+<p>Our phone will be a very simple design, with a rectangular frame, a screen, and two identical cameras:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_16-22-36.png" alt=""><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_16-23-22.png" alt=""></p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_15-44-44.png" alt=""></p>
+
+<p>During the tutorial, we will create the following files:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_16-14-04.png" alt=""></p>
+
+<p>Two of these are assembly files, as the camera will be included as a sub-assembly in the phone in two different places, front and rear.  Assemblies, sub-assemblies and parts are handled in exactly the same way.</p>
+
+<p>Saving the components in separate files allows them to be worked on by different engineers. Each will have a clearly defined interface to the other documents, allowing easy interchange of different or upgraded designs for modular components.</p>
+
+<h1>Setup:</h1>
+
+<p>We need a recent version of FreeCAD (at least 0.19).
+Under Tools -&gt; Addon manager, install the Assembly4 Workbench:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_17-26-48.png" alt=""></p>
+
+<hr>
+
+<h1>Create the frame:</h1>
+
+<p>From the start page of FreeCAD, select &ldquo;Create new&hellip;&rdquo;</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_15-31-48.png" alt=""></p>
+
+<p>Save the file in your selected directory as &ldquo;<em>Frame</em>&rdquo;</p>
+
+<p>Choose the Assembly 4 workbench <img src="FreeCADSubAssyImages/Screenshot_2020-05-02_15-58-34.png" alt=""> and create a new Body: <img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-02-11.png" alt="">  Leave the default name &ldquo;Body&rdquo;.</p>
+
+<p>Now we are ready to model the frame.
+In this case, it will be a simple rectangular pad with pockets for the screen and two cameras.</p>
+
+<p>Right-click on the Body in the tree and select &ldquo;Toggle active Body&rdquo;.</p>
+
+<p><img src="FreeCADSubAssyImages/FrameBodyRightClick.png" alt=""></p>
+
+<p>This will open the Part Design workbench. <img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-05-47.png" alt=""></p>
+
+<p>Create a new sketch:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-08_15-28-41.png" alt=""></p>
+
+<p>Select the XY Plane:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-07-00.png" alt=""></p>
+
+<p>and click OK.</p>
+
+<p>Create a rectangle 145x70mm:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-09-53.png" alt=""></p>
+
+<p>Press Escape, or the close button on the Tasks tab to close the sketch.</p>
+
+<p>Pad the sketch to create the frame of the phone:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-12-10.png" alt="">
+Leave the default 10mm and click OK.</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-13-54.png" alt=""></p>
+
+<p>Click the top face of the phone frame, then the &ldquo;Create a new sketch&rdquo; button. <img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-16-36.png" alt=""></p>
+
+<p>Set the dimensions of the screen as follows:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-22-26.png" alt=""></p>
+
+<p><strong>Note:</strong> Good engineering practice would reference these dimensions from a spreadsheet to enable rapid design upgrades or different phone sizes from the same design.</p>
+
+<p>Press Escape or Close to exit the sketch, and then create a pocket <img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-25-47.png" alt=""></p>
+
+<p>Make the pocket 2mm deep.</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-27-01.png" alt=""></p>
+
+<p>Open a new sketch on the top of the phone for the front camera cutout, and create a circle with the following dimensions:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-35-13.png" alt=""></p>
+
+<p>As before, create a pocket, this time 4mm deep:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-37-02.png" alt=""></p>
+
+<p>Flip the phone frame over, and repeat for the rear-facing camera, creating another 4mm deep pocket:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-41-36.png" alt=""></p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-42-23.png" alt=""></p>
+
+<p>The Tree for the <em>Frame</em> should now look like this:</p>
+
+<p><img src="FreeCADSubAssyImages/TreeFrame.png" alt=""></p>
+
+<p>The frame design is now complete, but we need some local co-ordinate systems to allow assembly of the components to the frame in the correct places.</p>
+
+<h2>Create a Local Co-ordinate System for the Screen</h2>
+
+<p>Switch back to Assembly 4 workbench. <img src="FreeCADSubAssyImages/Screenshot_2020-05-02_15-58-34.png" alt=""></p>
+
+<p>This is the heart of Assembly 4.  We will add the Local Co-ordinate Systems to the frame in the positions and orientations for the sub-assembly parts to attach correctly to the frame.</p>
+
+<p>First, we will create an LCS to attach the screen in the corner of the frame. Select the <strong>Body</strong> in the tree <img src="FreeCADSubAssyImages/TreeFrameBodySelected.png" alt="">  and then click &ldquo;Create a new co-ordinate system in part&rdquo;
+<img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-30-49.png" alt=""></p>
+
+<p>Call it LCSScreen:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-00-35.png" alt=""></p>
+
+<p>Right-click on the new LCS in the tree</p>
+
+<p><img src="FreeCADSubAssyImages/TreeFrameLCSScreenSelected.png" alt=""></p>
+
+<p>and select &ldquo;Edit datum&rdquo;.</p>
+
+<p>Highlight &ldquo;XY tangent to surface&rdquo;</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-17-20.png" alt=""></p>
+
+<p>Zoom in on the bottom left corner of the frame, and select the base plane of the pocket created earlier.</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-16-02.png" alt=""></p>
+
+<p>Next, click exactly in the corner of the pocket to select the vertex that will lock in the X and Y for this datum:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-19-23.png" alt=""></p>
+
+<p>Note the small yellow dot in the image above.</p>
+
+<p>We now have an LCS positioned correctly, but it is facing out from the corner, so we need to rotate it.</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-21-24.png" alt=""></p>
+
+<p>In the bottom of the dialogue, change &ldquo;Around z-axis&rdquo; to 180&deg;:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-22-37.png" alt=""></p>
+
+<p>The LCS is now correctly oriented for the screen to attach.</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-23-54.png" alt=""></p>
+
+<p>Click OK at the top of the dialogue and move to the front camera position.</p>
+
+<h2>Create a Local Co-ordinate System for the front camera assembly</h2>
+
+<p>Again, select the <strong>Body</strong> in the tree and click &ldquo;Create a new co-ordinate system in part&rdquo;
+<img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-30-49.png" alt=""></p>
+
+<p>Name it LCSFrontCamera.</p>
+
+<p>Right-click on the new LCS in the tree and select &ldquo;Edit datum&rdquo;.</p>
+
+<p>Select the bottom circumference of the front camera pocket (yellow line in this picture):</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-32-47.png" alt=""></p>
+
+<p>Click OK.</p>
+
+<p>That&#39;s it.  We don&#39;t need to consider rotation in this case, and the module has automatically selected &ldquo;concentric&rdquo; as the constraint type.</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-35-45.png" alt=""></p>
+
+<h2>Create a Local Co-ordinate System for the rear camera assembly</h2>
+
+<p>Repeat the exercise above for the rear camera:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_15-38-23.png" alt=""></p>
+
+<p>Save the <em>Frame</em> file.</p>
+
+<hr>
+
+<h1>Create the screen:</h1>
+
+<p>Open a new file and save it as <em>Screen</em></p>
+
+<p>Choose the Assembly 4 workbench <img src="FreeCADSubAssyImages/Screenshot_2020-05-02_15-58-34.png" alt=""> and create a new Body: <img src="FreeCADSubAssyImages/Screenshot_2020-05-02_18-02-11.png" alt="">  Leave the default name &ldquo;Body&rdquo;.</p>
+
+<p>Right-click on the Body in the model tree and select &ldquo;Toggle active body&rdquo; to open the Part Design workbench.</p>
+
+<p>Create a new sketch on the XY plane with a simple rectangle:  </p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_14-42-54.png" alt=""></p>
+
+<p>Note that the corner of the sketch is co-incident with the origin.  This will align later with the LCS that we created above.</p>
+
+<p>Exit the sketch, then create a pad <img src="FreeCADSubAssyImages/Screenshot_2020-05-09_17-01-48.png" alt=""> 1mm vertically.</p>
+
+<p>Right-click on the Body in the model tree, then change the appearance to 70% transparency, and a blue-ish colour.</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_14-49-07.png" alt=""></p>
+
+<p>Save the Screen file.</p>
+
+<hr>
+
+<h1>Create the camera bezel:</h1>
+
+<p>Open a new file and save it as <em>Bezel</em>.</p>
+
+<p>Create a new body <img src="FreeCADSubAssyImages/Screenshot_2020-05-09_16-48-13.png" alt=""> under the Assembly 4 workbench.</p>
+
+<p>Right-click on the Body in the model tree and select &ldquo;Toggle active body&rdquo; to open the Part Design workbench.</p>
+
+<p>Create a new sketch on the XY plane with two concentric circles 8mm and 6mm diameter:  </p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-09_17-00-34.png" alt=""></p>
+
+<p>Exit the sketch, then pad <img src="FreeCADSubAssyImages/Screenshot_2020-05-09_17-01-48.png" alt=""> 5mm vertically.</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-09_17-02-32.png" alt=""></p>
+
+<hr>
+
+<h2>Create a Local Co-ordinate System for the front camera assembly</h2>
+
+<p>We now need to insert a Local Co-ordinate System to attach the lens when we create the <em>Camera</em> sub-assembly.
+The lens will be positioned near the top of the bezel.</p>
+
+<p>Select the <strong>Body</strong> in the model tree and click &ldquo;Create a new co-ordinate system in part&rdquo;
+<img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-30-49.png" alt=""> under the Assembly 4 workbench.</p>
+
+<p>Name it LCS_LensAttachment:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-32-46.png" alt=""></p>
+
+<p>Right-click on the new LCS in the tree</p>
+
+<p><img src="FreeCADSubAssyImages/TreeBezelLCSSelectid.png" alt=""></p>
+
+<p>and select &ldquo;Edit datum&rdquo;.
+Select the top circumference to place the datum at the top of the bezel.</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-36-22.png" alt=""></p>
+
+<p>To protect the lens, we need to recess it 1mm below the top of the bezel.  Change &ldquo;In z-direction&rdquo; to -1 mm:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-38-56.png" alt=""></p>
+
+<p>This drops the LCS as shown:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-39-43.png" alt=""></p>
+
+<p>Save the <em>Bezel</em> file.</p>
+
+<hr>
+
+<h1>Create the camera lens:</h1>
+
+<p>Open a new file, and save as <em>Lens</em>.
+Create a body as before, then make a spherical lens starting with the following sketch on the <strong>XZ</strong> Plane, not the XY plane as for the previous parts:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-09_16-03-46.png" alt=""></p>
+
+<p>Note that the center of the radius must be constrained vertically to the origin for a tangential top surface.
+The exact dimensions are not important for this exercise.</p>
+
+<p>Revolve <img src="FreeCADSubAssyImages/Screenshot_2020-05-09_16-25-55.png" alt=""> the sketch 360&deg;, then mirror <img src="FreeCADSubAssyImages/Screenshot_2020-05-09_16-26-42.png" alt="">  the Revolution feature</p>
+
+<p><img src="FreeCADSubAssyImages/MirrorRevolution.png" alt=""></p>
+
+<p>to create a double-sided lens something like this:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-09_16-21-41.png" alt=""></p>
+
+<p>You can adjust colours and transparency if you like.</p>
+
+<p>For this component, we have modelled with the origin at the centre of mass, so we don&#39;t need to add an extra Local Co-ordinate System.</p>
+
+<p>Our lens model tree should now look like this:</p>
+
+<p><img src="FreeCADSubAssyImages/TreeLensRevolvedMirrored.png" alt=""></p>
+
+<p>Save the <em>Lens</em> file.</p>
+
+<hr>
+
+<h1>Create the camera sub-assembly:</h1>
+
+<p>Create a new file, and save it as <em>Camera</em>.</p>
+
+<p>Create a new Assembly 4 <strong>Model</strong>. <img src="FreeCADSubAssyImages/Screenshot_2020-05-09_16-47-08.png" alt="">  In this case, we don&#39;t need a Body, as we will link the bodies from the parts already created.</p>
+
+<p>Prior to linking bodies from other parts, we need to close and re-open all files so that part names are shown correctly.</p>
+
+<p>Insert a link to the <em>Bezel</em> body <img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-18-31.png" alt="">, keeping the default name <em>Bezel_Body</em>, since there will be only one instance of it in this sub-assembly.</p>
+
+<p><img src="FreeCADSubAssyImages/InsertBezel.png" alt=""></p>
+
+<p>Select <strong>Bezel_Body</strong> in the model tree and click &ldquo;Move/Attach a part in the assembly&rdquo; <img src="FreeCADSubAssyImages/MoveAttachPart.png" alt=""> under the Assembly 4 workbench.</p>
+
+<p>For &ldquo;Attach to:&rdquo;, select &ldquo;Parent Assembly&rdquo;.
+Select &ldquo;LCS_Origin&rdquo; on both sides of the dialogue:</p>
+
+<p><img src="FreeCADSubAssyImages/PlaceBezel.png" alt=""></p>
+
+<p>This will place the bezel at the origin of the sub-assembly.</p>
+
+<p>Now insert the <em>Lens#Body</em> into the <em>Bezel</em> <img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-18-31.png" alt=""> in the same way, except in this case, we will attach it to the LCS created earlier.
+Select &ldquo;Bezel&rdquo; on the right-hand side of the dialogue this time, and &ldquo;LCS_LensAttachment&rdquo; in the parent:</p>
+
+<p><img src="FreeCADSubAssyImages/PlaceLens.png" alt=""></p>
+
+<p>The lens is now positioned with it&#39;s origin 1mm below the top of the bezel:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-49-06.png" alt=""></p>
+
+<p>Save the <em>Camera</em> sub-assembly file.</p>
+
+<hr>
+
+<h1>Create the phone assembly:</h1>
+
+<p>Create a new file, and save it as <em>Phone</em>.</p>
+
+<p>Create a new Assembly 4 model. <img src="FreeCADSubAssyImages/Screenshot_2020-05-09_16-47-08.png" alt=""></p>
+
+<p>Insert a link to the <em>Frame</em> part <img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-18-31.png" alt="">, keeping the default name <em>Frame_Body</em>, since there will be only one instance of it in this assembly.</p>
+
+<p><img src="FreeCADSubAssyImages/InsertFrame.png" alt=""></p>
+
+<p>The frame will be inserted at the origin, so there is no need to place it.</p>
+
+<p>Insert a link to the <em>Screen</em> body <img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-18-31.png" alt="">, keeping the default name <em>Screen_Body</em>, since there will be only one instance of it in this assembly.</p>
+
+<p><img src="FreeCADSubAssyImages/InsertScreen.png" alt=""></p>
+
+<p>Place <img src="FreeCADSubAssyImages/MoveAttachPart.png" alt=""> the <em>Screen#Body</em> by selecting &ldquo;LCS_0&rdquo; for the Screen, and &ldquo;LCS_Screen&rdquo; for the co-ordinate system in the frame.</p>
+
+<p><img src="FreeCADSubAssyImages/PlaceScreen.png" alt=""></p>
+
+<p>Because we aligned the LCS in the <em>Frame</em> file, it positions correctly without any rotation:</p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_16-00-54.png" alt=""></p>
+
+<hr>
+
+<p>Now we can insert two instances of the <em>Camera</em> sub-assembly.</p>
+
+<p>As above, insert a link to the <em>Camera</em> part <img src="FreeCADSubAssyImages/Screenshot_2020-05-15_13-18-31.png" alt="">, but this time, <strong>Change</strong> the name to <em>CameraFront</em>, since there will be two instances of it in the phone assembly.</p>
+
+<p><img src="FreeCADSubAssyImages/InsertCamera.png" alt=""></p>
+
+<p>Place the part, choosing &ldquo;LCS_Origin&rdquo; for the camera linked part, which is located at the base of the sub-assembly, and &ldquo;LCS_FrontCamera&rdquo; for the parent part.</p>
+
+<p><img src="FreeCADSubAssyImages/PlaceCamera.png" alt=""></p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_16-07-14.png" alt=""></p>
+
+<p>Repeat for the rear camera, selecting the same model, but this time naming it to &ldquo;<strong>CameraRear</strong>&rdquo; and selecting &ldquo;LCS_RearCamera&rdquo; as the attachment point on the frame.</p>
+
+<p><img src="FreeCADSubAssyImages/InsertCameraRear.png" alt=""></p>
+
+<p><img src="FreeCADSubAssyImages/PlaceCameraRear.png" alt=""></p>
+
+<p><img src="FreeCADSubAssyImages/Screenshot_2020-05-15_16-08-27.png" alt=""></p>
+
+<p>Our model tree now looks like this, showing <strong>Bodies</strong> attached from the simple parts, and <strong>Models</strong> from the sub-assemblies.</p>
+
+<p>Save the <em>Phone</em> assembly file.</p>
+
+<hr>
+
+<p>We now have a very stylish smartphone, ready for the day when the &ldquo;square&rdquo; look comes back into fashion.</p>
+
+<p>This model attaches subassemblyies at their origin.  For a quick tutorial on subassemblies with their own Local Co-ordinate Systems, refer to <a href="https://github.com/thermalling/FreeCADAsm4_TutorialSubassemblyTable">https://github.com/thermalling/FreeCADAsm4_TutorialSubassemblyTable</a>.</p>
+
+<p>Thanks to Zolko for Assembly 4, and the FreeCAD developers for making this possible for us.</p>
+
+<p>All feedback and corrections most welcome.</p>
+</body></html>

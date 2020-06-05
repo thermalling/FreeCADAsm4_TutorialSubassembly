@@ -47,9 +47,7 @@ Right-click on the Body in the tree and select "Toggle active Body".
 
 ![](FreeCADSubAssyImages/FrameBodyRightClick.png)
 
-This will open the Part Design workbench.
-
-![](FreeCADSubAssyImages/Screenshot_2020-05-02_18-05-47.png)
+This will open the Part Design workbench. ![](FreeCADSubAssyImages/Screenshot_2020-05-02_18-05-47.png)
 
 Create a new sketch:
 
@@ -71,11 +69,13 @@ Pad the sketch to create the frame of the phone:
 
 ![](FreeCADSubAssyImages/Screenshot_2020-05-02_18-12-10.png)
 Leave the default 10mm and click OK.
+
 ![](FreeCADSubAssyImages/Screenshot_2020-05-02_18-13-54.png)
 
 Click the top face of the phone frame, then the "Create a new sketch" button. ![](FreeCADSubAssyImages/Screenshot_2020-05-02_18-16-36.png)
 
 Set the dimensions of the screen as follows:
+
 ![](FreeCADSubAssyImages/Screenshot_2020-05-02_18-22-26.png)
 
 **Note:** Good engineering practice would reference these dimensions from a spreadsheet to enable rapid design upgrades or different phone sizes from the same design.
@@ -250,6 +250,7 @@ Right-click on the new LCS in the tree
 
 and select "Edit datum".
 Select the top circumference to place the datum at the top of the bezel.
+
 ![](FreeCADSubAssyImages/Screenshot_2020-05-15_13-36-22.png)
 
 To protect the lens, we need to recess it 1mm below the top of the bezel.  Change "In z-direction" to -1 mm:
@@ -336,6 +337,7 @@ Create a new file, and save it as *Phone*.
 Create a new Assembly 4 model. ![](FreeCADSubAssyImages/Screenshot_2020-05-09_16-47-08.png)
 
 Insert a link to the *Frame* part ![](FreeCADSubAssyImages/Screenshot_2020-05-15_13-18-31.png), keeping the default name *Frame\_Body*, since there will be only one instance of it in this assembly.
+
 ![](FreeCADSubAssyImages/InsertFrame.png)
 
 The frame will be inserted at the origin, so there is no need to place it.
